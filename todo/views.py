@@ -1,17 +1,12 @@
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import viewsets
+from rest_framework import generics
 
 from .models import Todo
 from .serializers import TodoSimpleSerializer
 
 
-class TodoViewSet(APIView):
-    def get(self, request):
-        todos = Todo.objects.filter(complete=False)
-        serializer = TodoSimpleSerializer(todos, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+class TodosAPIView(generics.ListCreateAPIView):
+    queryset = Todo.objects.all()
+    serializer_class = TodoSimpleSerializer
 
 
-todo_viewset = TodoViewSet.as_view()
+todos_api_view = TodosAPIView.as_view()

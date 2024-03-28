@@ -1,7 +1,7 @@
 from django.urls import path
 
-from .views import todo_viewset
+from .views import todos_api_view
 
 urlpatterns = [
-    path('todos/', todo_viewset),
+    path('todo/', todos_api_view),
 ]
